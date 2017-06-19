@@ -17,8 +17,8 @@ verifier:
   name: inspec
 
 transport:
-  username: <%= ENV['GCE_USERNAME'] %>
-  ssh_key: <%= ENV['GCE_ssh_key'] %>
+  username: <%= ENV['GCE_SSH_KEY_USERNAME'] %>
+  ssh_key: <%= ENV['GCE_SSH_KEY'] %>
 
 platforms:
   - name: centos-7
