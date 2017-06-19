@@ -1,0 +1,36 @@
+---
+driver:
+  name: gce
+  project: <%= ENV['GCE_PROJECT'] %>
+  zone: <%= ENV['GCE_ZONE'] %>
+  email: <%= ENV['GCE_EMAIL'] %>
+  tags:
+    - test-kitchen
+  service_account_scopes:
+    - devstorage.read_write
+    - userinfo.email
+
+provisioner:
+  name: chef_zero
+
+verifier:
+  name: inspec
+
+transport:
+  username: <%= ENV['GCE_SSH_KEY_USERNAME'] %>
+  ssh_key: <%= ENV['GCE_SSH_KEY'] %>
+
+platforms:
+  - name: centos-7
+    driver:
+      image_project: centos-cloud
+      image_name: centos-7-v20170227
+
+suites:
+  - name: default
+    run_list:
+      - recipe[learn_chef_httpd::default]
+    verifier:
+      inspec_tests:
+        - test/smoke/default
+    attributes:
