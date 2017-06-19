@@ -1,9 +1,9 @@
 ---
 driver:
   name: gce
-  project: poetic-archive-161207
-  zone: us-west1-a
-  email: hamedaniraja@gmail.com
+  project: <%= ENV['GCE_PROJECT'] %>
+  zone: <%= ENV['GCE_ZONE'] %>
+  email: <%= ENV['GCE_EMAIL'] %>
   tags:
     - test-kitchen
   service_account_scopes:
@@ -17,8 +17,8 @@ verifier:
   name: inspec
 
 transport:
-  username: keivan
-  ssh_key: /Users/keivan/.ssh/google_compute_engine
+  username: <%= ENV['GCE_USERNAME'] %>
+  ssh_key: <%= ENV['GCE_ssh_key'] %>
 
 platforms:
   - name: centos-7
